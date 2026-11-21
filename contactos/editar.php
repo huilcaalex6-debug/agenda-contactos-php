@@ -24,17 +24,23 @@ if (!$contacto) {
     exit;
 }
 
+$categorias = $pdo->query("SELECT * FROM categorias ORDER BY id ASC")->fetchAll();
+
 $errores = [];
 $nombre = $contacto['nombre'];
 $telefono = $contacto['telefono'];
 $correo = $contacto['correo'];
 $ciudad = $contacto['ciudad'];
+$id_categoria = $contacto['id_categoria'];
+$favorito = $contacto['favorito'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = trim($_POST['nombre'] ?? '');
     $telefono = trim($_POST['telefono'] ?? '');
     $correo = trim($_POST['correo'] ?? '');
     $ciudad = trim($_POST['ciudad'] ?? '');
+    $id_categoria = (int)($_POST['id_categoria'] ?? 5);
+    $favorito = isset($_POST['favorito']) ? 1 : 0;
 
     if (empty($nombre)) $errores[] = "El nombre es obligatorio.";
     if (empty($telefono)) $errores[] = "El teléfono es obligatorio.";
@@ -42,12 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($ciudad)) $errores[] = "La ciudad es obligatoria.";
 
     if (empty($errores)) {
-        $update = $pdo->prepare("UPDATE contactos SET nombre = :nombre, telefono = :telefono, correo = :correo, ciudad = :ciudad WHERE id = :id AND id_usuario = :id_usuario");
+        $update = $pdo->prepare("UPDATE contactos SET id_categoria = :id_categoria, nombre = :nombre, telefono = :telefono, correo = :correo, ciudad = :ciudad, favorito = :favorito WHERE id = :id AND id_usuario = :id_usuario");
         $update->execute([
+            'id_categoria' => $id_categoria,
             'nombre' => $nombre,
             'telefono' => $telefono,
             'correo' => $correo,
             'ciudad' => $ciudad,
+            'favorito' => $favorito,
             'id' => $id_contacto,
             'id_usuario' => $id_usuario
         ]);
@@ -92,6 +100,22 @@ include '../includes/header.php';
                     <div class="mb-3">
                         <label class="form-label">Ciudad</label>
                         <input type="text" name="ciudad" class="form-control" value="<?= htmlspecialchars($ciudad) ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Categoría</label>
+                        <select name="id_categoria" class="form-select">
+                            <?php foreach ($categorias as $cat): ?>
+                                <option value="<?= $cat['id'] ?>" <?= $id_categoria == $cat['id'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($cat['nombre']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" name="favorito" id="favorito" value="1" <?= $favorito ? 'checked' : '' ?>>
+                        <label class="form-check-label" for="favorito">
+                            Marcar como contacto favorito
+                        </label>
                     </div>
                     <div class="d-flex justify-content-between">
                         <a href="../dashboard.php" class="btn btn-secondary">Cancelar</a>

@@ -9,11 +9,11 @@
 <body class="bg-light">
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="/agenda-contactos/dashboard.php">Agenda Personal</a>
+        <a class="navbar-brand fw-bold" href="/dashboard.php">Agenda Personal</a>
         <?php if (isset($_SESSION['usuario_id'])): ?>
             <div class="d-flex align-items-center text-white">
                 <span class="me-3 small"><?= htmlspecialchars($_SESSION['usuario_nombre']) ?></span>
-                <a href="/agenda-contactos/auth/logout.php" class="btn btn-outline-light btn-sm">Cerrar Sesión</a>
+                <a href="/auth/logout.php" class="btn btn-outline-light btn-sm">Cerrar Sesión</a>
             </div>
         <?php endif; ?>
     </div>
