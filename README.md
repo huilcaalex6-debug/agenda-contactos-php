@@ -1,20 +1,36 @@
 # Agenda Personal de Contactos
 
-Aplicación web creada en PHP y MySQL que permite a cada usuario registrarse, iniciar sesión y administrar su propia lista de contactos (agregar, ver, editar y eliminar) de manera privada y segura.
+Aplicación web creada en PHP y MySQL que permite a cada usuario registrarse, iniciar sesión y administrar su propia lista de contactos de manera privada y organizada.
 
-## Herramientas utilizadas
-* **Programación:** PHP 8
-* **Base de datos:** MySQL
-* **Diseño:** HTML5 y Bootstrap 5
-* **Servidor local:** XAMPP (Apache)
+## Enlace de la aplicación en línea
+* **URL pública:** http://agenda-alex.rf.gd
 
-## Qué se necesita para ejecutarlo
-* Tener instalado **XAMPP** (con Apache y MySQL activos).
-* Un navegador web (Chrome, Edge, Brave, etc.).
+## Mejoras implementadas en esta versión
+* **Búsqueda de contactos:** Filtrado por nombre, correo o ciudad.
+* **Ordenamiento:** Organización de contactos por nombre, ciudad o fecha de creación.
+* **Categorías:** Clasificación por Familia, Amigos, Trabajo, Universidad y Otro.
+* **Contactos favoritos:** Marcado de favoritos y vista filtrada de destacados.
 
-## Cómo instalar y probar el proyecto
-1. Descarga o clona esta carpeta dentro de `htdocs` en tu instalación de XAMPP (`htdocs/agenda-contactos`).
-2. Abre el panel de XAMPP y enciende **Apache** y **MySQL**.
-3. Abre **MySQL Workbench** o **phpMyAdmin** y ejecuta el archivo `database.sql` para que se creen la base de datos y las tablas.
-4. Revisa el archivo `config/db.php` y coloca la contraseña de tu servidor MySQL si tienes una configurada.
-5. Entra en tu navegador a la dirección: `http://localhost/agenda-contactos/` y crea tu cuenta para empezar a usar la agenda.
+## Capturas de pantalla
+* **Inicio de sesión:**
+  ![Inicio de sesión](img/Inicio_sesion.png)
+
+* **Registro de contacto:**
+  ![Registro de contacto](img/Registro_contacto.png)
+
+* **Panel de contactos creados:**
+  ![Contactos creados](img/Contactos_creados.png)
+
+## Tecnologías utilizadas
+* **Lenguaje:** PHP 8
+* **Base de datos:** MySQL (PDO)
+* **Diseño e interfaz:** HTML5 y Bootstrap 5
+* **Hosting gratuito:** InfinityFree
+* **Entorno local:** XAMPP (Apache)
+
+## Cómo instalar y probar el proyecto localmente
+1. Duplica o descarga esta carpeta dentro de `htdocs` en XAMPP (`htdocs/agenda-contactos`).
+2. Enciende **Apache** y **MySQL** en el panel de XAMPP.
+3. Importa el archivo `database.sql` en **phpMyAdmin** o **MySQL Workbench** para crear la base de datos y las tablas.
+4. Verifica las credenciales locales en `config/db.php` (`localhost`, usuario `root`).
+5. Entra en tu navegador a `http://localhost/agenda-contactos/`.
